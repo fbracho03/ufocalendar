@@ -15,18 +15,12 @@
       --muted: #9ca9c7;
       --accent: #6ee7ff;
       --accent-2: #8b7cff;
-      --success: #7fffb2;
       --shadow: 0 10px 30px rgba(0,0,0,0.35);
       --radius: 20px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
@@ -121,6 +115,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      cursor: pointer;
     }
 
     .btn:hover {
@@ -260,25 +255,15 @@
       font-weight: 600;
     }
 
-    .filter-pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .pill {
-      padding: 9px 12px;
-      border-radius: 999px;
-      font-size: 13px;
-      color: var(--text);
+    select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .pill.active {
-      border-color: rgba(110,231,255,0.35);
-      box-shadow: inset 0 0 0 1px rgba(110,231,255,0.12);
-      color: var(--accent);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
     }
 
     .feed {
@@ -439,6 +424,15 @@
       font-size: 14px;
     }
 
+    .empty-state {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--card);
+      border: 1px dashed rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+    }
+
     .footer {
       color: var(--muted);
       text-align: center;
@@ -546,11 +540,11 @@
       <aside class="side-panel">
         <div class="stat">
           <div class="stat-label">Listed events</div>
-          <div class="stat-value">03</div>
+          <div class="stat-value" id="event-count">00</div>
         </div>
         <div class="stat">
           <div class="stat-label">Coverage</div>
-          <div class="stat-value">USA</div>
+          <div class="stat-value" id="coverage-count">—</div>
         </div>
         <div class="stat">
           <div class="stat-label">Next expansion</div>
@@ -564,33 +558,17 @@
         <h3>Browse Feed</h3>
 
         <div class="filter-group">
-          <label>Region</label>
-          <div class="filter-pill-row">
-            <div class="pill active">All</div>
-            <div class="pill">United States</div>
-            <div class="pill">Canada</div>
-            <div class="pill">Europe</div>
-          </div>
+          <label for="typeFilter">Event Type</label>
+          <select id="typeFilter">
+            <option value="All">All Events</option>
+          </select>
         </div>
 
         <div class="filter-group">
-          <label>Type</label>
-          <div class="filter-pill-row">
-            <div class="pill active">All Events</div>
-            <div class="pill">Conference</div>
-            <div class="pill">CE5</div>
-            <div class="pill">Skywatch</div>
-            <div class="pill">Disclosure</div>
-          </div>
-        </div>
-
-        <div class="filter-group">
-          <label>Status</label>
-          <div class="filter-pill-row">
-            <div class="pill active">Upcoming</div>
-            <div class="pill">Featured</div>
-            <div class="pill">Community</div>
-          </div>
+          <label for="countryFilter">Country</label>
+          <select id="countryFilter">
+            <option value="All">All Countries</option>
+          </select>
         </div>
       </aside>
 
@@ -600,4 +578,192 @@
             <h2>Upcoming Events</h2>
             <p>Forum-style event feed for conferences, meetups, and skywatches.</p>
           </div>
-          <
+          <button class="btn" id="sortButton">Newest First</button>
+        </div>
+
+        <div id="events-container"></div>
+      </section>
+    </section>
+
+    <section class="info-grid">
+      <div class="info-card">
+        <h3>Community-first</h3>
+        <p>
+          Built to help researchers, experiencers, organizers, and curious newcomers
+          discover where the next important gathering is happening.
+        </p>
+      </div>
+      <div class="info-card">
+        <h3>Designed to grow</h3>
+        <p>
+          Start with U.S. events, then expand internationally with country pages,
+          region filters, maps, and organizer submissions.
+        </p>
+      </div>
+      <div class="info-card">
+        <h3>Forum-like flow</h3>
+        <p>
+          The feed layout is meant to feel familiar and easy to browse, especially
+          on mobile where most people will likely discover events.
+        </p>
+      </div>
+    </section>
+
+    <div class="footer">
+      UFO Events Calendar • Built for the community
+    </div>
+  </main>
+
+  <script>
+    let allEvents = [];
+    let sortNewestFirst = true;
+
+    function formatDateParts(dateString) {
+      const date = new Date(dateString + "T12:00:00");
+      const month = date.toLocaleString("en-US", { month: "short" });
+      const day = date.getDate();
+      const year = date.getFullYear();
+      return { month, day, year };
+    }
+
+    function getEventIcon(type) {
+      const value = (type || "").toLowerCase();
+      if (value.includes("conference")) return "🛸";
+      if (value.includes("festival")) return "👽";
+      if (value.includes("ce5")) return "🌌";
+      if (value.includes("skywatch")) return "✨";
+      return "🛸";
+    }
+
+    function populateFilters(events) {
+      const typeFilter = document.getElementById("typeFilter");
+      const countryFilter = document.getElementById("countryFilter");
+
+      const types = [...new Set(events.map(e => e.type).filter(Boolean))].sort();
+      const countries = [...new Set(events.map(e => e.country).filter(Boolean))].sort();
+
+      types.forEach(type => {
+        const option = document.createElement("option");
+        option.value = type;
+        option.textContent = type;
+        typeFilter.appendChild(option);
+      });
+
+      countries.forEach(country => {
+        const option = document.createElement("option");
+        option.value = country;
+        option.textContent = country;
+        countryFilter.appendChild(option);
+      });
+    }
+
+    function updateStats(events) {
+      document.getElementById("event-count").textContent = String(events.length).padStart(2, "0");
+
+      const countries = [...new Set(events.map(e => e.country).filter(Boolean))];
+      document.getElementById("coverage-count").textContent = countries.length === 1
+        ? countries[0]
+        : countries.length + " Countries";
+    }
+
+    function renderEvents() {
+      const container = document.getElementById("events-container");
+      const typeValue = document.getElementById("typeFilter").value;
+      const countryValue = document.getElementById("countryFilter").value;
+
+      let filtered = [...allEvents];
+
+      if (typeValue !== "All") {
+        filtered = filtered.filter(event => event.type === typeValue);
+      }
+
+      if (countryValue !== "All") {
+        filtered = filtered.filter(event => event.country === countryValue);
+      }
+
+      filtered.sort((a, b) => {
+        const aDate = new Date(a.date);
+        const bDate = new Date(b.date);
+        return sortNewestFirst ? bDate - aDate : aDate - bDate;
+      });
+
+      updateStats(filtered);
+
+      if (!filtered.length) {
+        container.innerHTML = `
+          <div class="empty-state">
+            No events match the current filters yet.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(event => {
+        const parts = formatDateParts(event.date);
+        const icon = getEventIcon(event.type);
+        const safeLink = event.link && event.link.trim() !== "" ? event.link : "#";
+
+        return `
+          <article class="event-card">
+            <div>
+              <div class="event-top">
+                <div class="event-icon">${icon}</div>
+                <div class="event-meta">
+                  <h3>${event.title}</h3>
+                  <div class="meta-line">
+                    <span>📍 ${event.location}</span>
+                    <span>🌎 ${event.country}</span>
+                  </div>
+                  <div class="tag-row">
+                    <span class="tag">${event.type}</span>
+                  </div>
+                  <p class="event-desc">${event.description || ""}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="event-side">
+              <div class="date-badge">
+                <span class="month">${parts.month}</span>
+                <span class="day-range">${parts.day}</span>
+                <span class="year">${parts.year}</span>
+              </div>
+              <a class="btn btn-primary" href="${safeLink}" target="_blank" rel="noopener noreferrer">
+                View Event
+              </a>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    async function loadEvents() {
+      try {
+        const response = await fetch("./events.json");
+        allEvents = await response.json();
+
+        populateFilters(allEvents);
+        renderEvents();
+      } catch (error) {
+        document.getElementById("events-container").innerHTML = `
+          <div class="empty-state">
+            Could not load events right now.
+          </div>
+        `;
+        console.error("Error loading events:", error);
+      }
+    }
+
+    document.getElementById("typeFilter").addEventListener("change", renderEvents);
+    document.getElementById("countryFilter").addEventListener("change", renderEvents);
+
+    document.getElementById("sortButton").addEventListener("click", function () {
+      sortNewestFirst = !sortNewestFirst;
+      this.textContent = sortNewestFirst ? "Newest First" : "Soonest First";
+      renderEvents();
+    });
+
+    loadEvents();
+  </script>
+</body>
+</html>
