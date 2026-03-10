@@ -1,64 +1,603 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>UFO Events Calendar</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UFO Events Calendar</title>
+  <style>
+    :root{
+      --bg: #070b14;
+      --bg-secondary: #0c1220;
+      --card: rgba(15, 22, 38, 0.82);
+      --card-strong: rgba(17, 25, 43, 0.96);
+      --border: rgba(110, 170, 255, 0.18);
+      --text: #eef4ff;
+      --muted: #9ca9c7;
+      --accent: #6ee7ff;
+      --accent-2: #8b7cff;
+      --success: #7fffb2;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+      --radius: 20px;
+    }
 
-<style>
+    * {
+      box-sizing: border-box;
+    }
 
-body{
-font-family: Arial;
-background:black;
-color:white;
-text-align:center;
-padding:40px;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-h1{
-font-size:40px;
-}
+    body {
+      margin: 0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(110, 231, 255, 0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(139, 124, 255, 0.08), transparent 25%),
+        linear-gradient(180deg, #050811 0%, #08101b 35%, #060a12 100%);
+      min-height: 100vh;
+    }
 
-.event{
-border:1px solid #444;
-padding:20px;
-margin:20px;
-border-radius:10px;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-a{
-color:#7df9ff;
-}
+    .shell {
+      width: min(1180px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 18px 0 60px;
+    }
 
-</style>
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 9, 17, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .topbar-inner {
+      width: min(1180px, calc(100% - 24px));
+      margin: 0 auto;
+      padding: 14px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(110,231,255,0.18), rgba(139,124,255,0.18));
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 24px rgba(110,231,255,0.10);
+      font-size: 20px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.05;
+    }
+
+    .brand-text small {
+      color: var(--muted);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(110,231,255,0.35);
+      box-shadow: 0 0 0 1px rgba(110,231,255,0.08), 0 10px 20px rgba(0,0,0,0.18);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, rgba(110,231,255,0.18), rgba(139,124,255,0.18));
+      border-color: rgba(110,231,255,0.28);
+    }
+
+    .hero {
+      padding: 34px 0 22px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 18px;
+    }
+
+    .hero-panel,
+    .side-panel,
+    .filters,
+    .event-card,
+    .info-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-panel {
+      padding: 26px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -40px -60px auto;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(110,231,255,0.16), transparent 60%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(34px, 6vw, 64px);
+      line-height: 0.98;
+      letter-spacing: -1.8px;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.6;
+      max-width: 720px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .side-panel {
+      padding: 22px;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .stat {
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 16px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .filters {
+      padding: 18px;
+      height: fit-content;
+      position: sticky;
+      top: 86px;
+    }
+
+    .filters h3,
+    .feed-header h2 {
+      margin: 0 0 14px;
+      font-size: 18px;
+    }
+
+    .filter-group {
+      margin-bottom: 18px;
+    }
+
+    .filter-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .filter-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .pill {
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      color: var(--text);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .pill.active {
+      border-color: rgba(110,231,255,0.35);
+      box-shadow: inset 0 0 0 1px rgba(110,231,255,0.12);
+      color: var(--accent);
+    }
+
+    .feed {
+      display: grid;
+      gap: 16px;
+    }
+
+    .feed-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 6px 2px;
+    }
+
+    .feed-header p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .event-card {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      transition: 0.2s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(110,231,255,0.28);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.28);
+    }
+
+    .event-top {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .event-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      background: linear-gradient(135deg, rgba(110,231,255,0.12), rgba(139,124,255,0.12));
+      border: 1px solid rgba(255,255,255,0.06);
+      flex-shrink: 0;
+    }
+
+    .event-meta h3 {
+      margin: 0 0 8px;
+      font-size: 28px;
+      line-height: 1.08;
+      letter-spacing: -0.6px;
+    }
+
+    .meta-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(110,231,255,0.08);
+      border: 1px solid rgba(110,231,255,0.14);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    .event-desc {
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 15px;
+      margin: 0;
+      max-width: 760px;
+    }
+
+    .event-side {
+      min-width: 150px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .date-badge {
+      background: var(--card-strong);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 12px 14px;
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .date-badge .month {
+      display: block;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .date-badge .day-range {
+      display: block;
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .date-badge .year {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .info-card {
+      padding: 18px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-size: 17px;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .footer {
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+      margin-top: 28px;
+      padding: 18px 0 8px;
+    }
+
+    @media (max-width: 980px) {
+      .hero,
+      .layout,
+      .info-grid,
+      .event-card {
+        grid-template-columns: 1fr;
+      }
+
+      .filters {
+        position: static;
+      }
+
+      .event-side {
+        align-items: flex-start;
+      }
+
+      .date-badge {
+        min-width: unset;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .hero-panel,
+      .side-panel,
+      .filters,
+      .event-card,
+      .info-card {
+        border-radius: 18px;
+      }
+
+      .hero-panel,
+      .side-panel,
+      .filters,
+      .event-card,
+      .info-card {
+        padding: 16px;
+      }
+
+      .event-meta h3 {
+        font-size: 24px;
+      }
+
+      .hero-panel p {
+        font-size: 15px;
+      }
+
+      .nav-actions {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="brand-icon">🛸</div>
+        <div class="brand-text">
+          <span>UFO Events Calendar</span>
+          <small>Community event hub</small>
+        </div>
+      </div>
 
-<h1>🛸 UFO Events Calendar</h1>
+      <div class="nav-actions">
+        <a class="btn" href="#events">Browse Events</a>
+        <a class="btn btn-primary" href="#">Submit Event</a>
+      </div>
+    </div>
+  </header>
 
-<p>A public calendar for UFO, UAP, CE5, disclosure, and experiencer events.</p>
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-panel">
+        <div class="eyebrow">Live • Nationwide to Worldwide</div>
+        <h1>Track the next wave of UFO community events.</h1>
+        <p>
+          A modern public calendar for UFO, UAP, CE5, disclosure, experiencer,
+          skywatch, and conference events — built to help the community stay connected.
+        </p>
 
-<div class="event">
-<h2>Contact in the Desert</h2>
-<p>📍 Indian Wells, California</p>
-<p>📅 May 29 – June 2, 2026</p>
-<a href="#">Event Website</a>
-</div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#events">Explore Upcoming Events</a>
+          <a class="btn" href="#">Add Your Event</a>
+        </div>
+      </div>
 
-<div class="event">
-<h2>Roswell UFO Festival</h2>
-<p>📍 Roswell, New Mexico</p>
-<p>📅 July 3 – July 6</p>
-<a href="#">Event Website</a>
-</div>
+      <aside class="side-panel">
+        <div class="stat">
+          <div class="stat-label">Listed events</div>
+          <div class="stat-value">03</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Coverage</div>
+          <div class="stat-value">USA</div>
+        </div>
+        <div class="stat">
+          <div class="stat-label">Next expansion</div>
+          <div class="stat-value">Global</div>
+        </div>
+      </aside>
+    </section>
 
-<div class="event">
-<h2>Local CE5 Skywatch</h2>
-<p>📍 Sedona, Arizona</p>
-<p>📅 Monthly meetup</p>
-</div>
+    <section class="layout">
+      <aside class="filters">
+        <h3>Browse Feed</h3>
 
-<p>More events coming soon.</p>
+        <div class="filter-group">
+          <label>Region</label>
+          <div class="filter-pill-row">
+            <div class="pill active">All</div>
+            <div class="pill">United States</div>
+            <div class="pill">Canada</div>
+            <div class="pill">Europe</div>
+          </div>
+        </div>
 
-</body>
-</html>
+        <div class="filter-group">
+          <label>Type</label>
+          <div class="filter-pill-row">
+            <div class="pill active">All Events</div>
+            <div class="pill">Conference</div>
+            <div class="pill">CE5</div>
+            <div class="pill">Skywatch</div>
+            <div class="pill">Disclosure</div>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Status</label>
+          <div class="filter-pill-row">
+            <div class="pill active">Upcoming</div>
+            <div class="pill">Featured</div>
+            <div class="pill">Community</div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="feed" id="events">
+        <div class="feed-header">
+          <div>
+            <h2>Upcoming Events</h2>
+            <p>Forum-style event feed for conferences, meetups, and skywatches.</p>
+          </div>
+          <
