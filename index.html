@@ -932,6 +932,9 @@ setTimeout(()=>{el.classList.remove('highlight')},2000);
     eventMap.fitBounds(
       group.getBounds().pad(0.2)
     );
+    setTimeout(() => {
+  eventMap.invalidateSize();
+}, 100);
 
   }
 
