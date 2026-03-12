@@ -711,9 +711,10 @@
                 <div class="event-meta">
                   <h3>${event.title}</h3>
                   <div class="meta-line">
-                    <span>📍 ${event.location}</span>
-                    <span>🌎 ${event.country}</span>
-                  </div>
+  <span>📍 ${event.location}</span>
+  <span>🌎 ${event.country}</span>
+  ${event.time && event.time.trim() !== "" ? `<span>🕒 ${event.time}</span>` : ""}
+</div>
                   <div class="tag-row">
                     <span class="tag">${event.type}</span>
                   </div>
