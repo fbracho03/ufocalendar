@@ -4,6 +4,7 @@
     "location": "Indian Wells, California",
     "country": "United States",
     "date": "2026-05-29",
+    "time": "9:00 AM",
     "type": "Conference",
     "link": "https://contactinthedesert.com",
     "description": "One of the largest UFO disclosure conferences bringing together researchers, scientists, and experiencers."
@@ -13,6 +14,7 @@
     "location": "Roswell, New Mexico",
     "country": "United States",
     "date": "2026-07-03",
+    "time": "",
     "type": "Festival",
     "link": "https://roswellufofestival.com",
     "description": "Annual event celebrating the Roswell incident with speakers, exhibits, and community gatherings."
@@ -22,6 +24,7 @@
     "location": "Sedona, Arizona",
     "country": "United States",
     "date": "2026-06-14",
+    "time": "8:30 PM",
     "type": "CE5 Meetup",
     "link": "",
     "description": "Community skywatch and CE5 contact gathering."
