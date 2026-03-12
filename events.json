@@ -28,5 +28,35 @@
     "type": "CE5 Meetup",
     "link": "",
     "description": "Community skywatch and CE5 contact gathering."
+  },
+  {
+    "title": "Contact in the Desert",
+    "location": "Indian Wells, California",
+    "country": "United States",
+    "date": "2026-05-29",
+    "time": "9:00 AM",
+    "type": "Conference",
+    "link": "https://contactinthedesert.com",
+    "description": "..."
+  },
+  {
+    "title": "Roswell UFO Festival",
+    "location": "Roswell, New Mexico",
+    "country": "United States",
+    "date": "2026-07-03",
+    "time": "",
+    "type": "Festival",
+    "link": "https://roswellufofestival.com",
+    "description": "..."
+  },
+  {
+    "title": "AlienCon",
+    "location": "Las Vegas, Nevada",
+    "country": "United States",
+    "date": "2026-09-11",
+    "time": "",
+    "type": "Conference",
+    "link": "https://aliencon.com",
+    "description": "Major convention featuring speakers and panels about extraterrestrial research."
   }
 ]
