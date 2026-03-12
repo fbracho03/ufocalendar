@@ -821,7 +821,7 @@
         const slug = event.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
         return `
-          <article class="event-card" id="event-${slug}">
+          <article class="event-card" id="event-${slug}" onclick="window.location.href='event.html?event=${slug}'" style="cursor:pointer;">
             <div>
               <div class="event-top">
                 <div class="event-icon">${icon}</div>
