@@ -746,11 +746,31 @@
         `;
       }).join("");
     }
+function setFeaturedEvent(events){
 
+  const upcoming = events
+    .filter(e => new Date(e.date) >= new Date())
+    .sort((a,b)=> new Date(a.date) - new Date(b.date))[0];
+
+  if(!upcoming) return;
+
+  document.getElementById("featured-title").innerText = upcoming.title;
+
+  document.getElementById("featured-location").innerText =
+    `${upcoming.location}, ${upcoming.country}`;
+
+  document.getElementById("featured-date").innerText =
+    new Date(upcoming.date).toDateString();
+
+  document.getElementById("featured-link").href =
+    upcoming.link || "#";
+}
+    
     async function loadEvents() {
       try {
         const response = await fetch("./events.json");
         allEvents = await response.json();
+        setFeaturedEvent(allEvents);
 
         populateFilters(allEvents);
         renderEvents();
