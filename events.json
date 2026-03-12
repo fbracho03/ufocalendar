@@ -1,62 +1,132 @@
 [
   {
+    "title": "UAP (UFO) Press Conference",
+    "location": "Washington, DC",
+    "country": "United States",
+    "date": "2026-01-20",
+    "time": "11:00 AM",
+    "type": "Press Conference",
+    "link": "https://www.press.org/events/uap-ufo-press-conference",
+    "description": "National Press Club event hosted by James Fox featuring witnesses, medical experts, government officials, and insiders discussing UAP evidence and transparency."
+  },
+  {
+    "title": "2026 UAP Detection and Tracking Summit",
+    "location": "Online",
+    "country": "Global",
+    "date": "2026-02-07",
+    "time": "8:30 AM MST",
+    "type": "Conference",
+    "link": "https://uapsummit.org/event/uap-summit-2026/",
+    "description": "Two-day online summit running February 7-8, 2026 focused on UAP detection, tracking, aviation safety, policy, and scientific collaboration."
+  },
+  {
+    "title": "State of the Union with Paola Harris",
+    "location": "Online",
+    "country": "Global",
+    "date": "2026-03-01",
+    "time": "6:00 PM MT",
+    "type": "Livestream",
+    "link": "https://starworksusa.com/webinars/",
+    "description": "Two-hour interactive StarworksUSA masterclass with investigative journalist Paola Harris on UFO disclosure and current developments."
+  },
+  {
+    "title": "Friends of Observers Group Monthly UFO Meeting",
+    "location": "Pine Bush, New York",
+    "country": "United States",
+    "date": "2026-03-05",
+    "time": "7:00 PM",
+    "type": "UFO Group Meeting",
+    "link": "https://pinebushmuseum.com/friends-of-observers-group-monthly-ufo-meeting",
+    "description": "Monthly in-person UFO and paranormal discussion group hosted at the Pine Bush UFO & Paranormal Museum. Starting back up again on Wednesday, March 5."
+  },
+  {
+    "title": "Ozark Mountain UFO Conference",
+    "location": "Eureka Springs, Arkansas",
+    "country": "United States",
+    "date": "2026-04-10",
+    "time": "",
+    "type": "Conference",
+    "link": "https://ozarkufoconference.com/",
+    "description": "38th annual Ozark Mountain UFO Conference, running April 10-12, 2026, with lectures, vendors, keynote sessions, and meet-and-greets."
+  },
+  {
+    "title": "ECETI Skywatch Weekends",
+    "location": "Trout Lake, Washington",
+    "country": "United States",
+    "date": "2026-05-14",
+    "time": "Evenings (Thu-Sat)",
+    "type": "Skywatch",
+    "link": "https://www.eceti.org/skywatch-weekends.html",
+    "description": "Recurring skywatch season at ECETI Ranch from May 14 through September 14, with non-overnight skywatch availability on Thursday, Friday, and Saturday evenings."
+  },
+  {
+    "title": "Close Encounters of the 3rd Vine",
+    "location": "McMinnville, Oregon",
+    "country": "United States",
+    "date": "2026-05-14",
+    "time": "5:30 PM",
+    "type": "Social Event",
+    "link": "https://ufofest.com/tickets/",
+    "description": "UFO Fest kickoff event featuring a cosmic tasting with six local wineries at McMenamins Hotel Oregon."
+  },
+  {
+    "title": "McMenamins UFO Festival",
+    "location": "McMinnville, Oregon",
+    "country": "United States",
+    "date": "2026-05-15",
+    "time": "",
+    "type": "Festival",
+    "link": "https://www.mcmenamins.com/ufo-festival",
+    "description": "26th annual UFO Festival running May 15-16, 2026 with speakers, costume contests, parade, live music, and vendor booths."
+  },
+  {
+    "title": "UFOs Meets Ancient Aliens",
+    "location": "Crestone, Colorado",
+    "country": "United States",
+    "date": "2026-05-22",
+    "time": "",
+    "type": "Retreat",
+    "link": "https://starworksusa.com/crestone-retreats",
+    "description": "Crestone Consciousness Retreat running May 22-24, 2026 with lectures, presentations, meditations, and skywatch."
+  },
+  {
     "title": "Contact in the Desert",
     "location": "Indian Wells, California",
     "country": "United States",
-    "date": "2026-05-29",
-    "time": "9:00 AM",
+    "date": "2026-05-28",
+    "time": "",
     "type": "Conference",
-    "link": "https://contactinthedesert.com",
-    "description": "One of the largest UFO disclosure conferences bringing together researchers, scientists, and experiencers."
+    "link": "https://contactinthedesert.com/",
+    "description": "Major UFO/UAP conference running May 28-June 1, 2026, focused on non-human intelligence, consciousness, technology, and disclosure."
+  },
+  {
+    "title": "Pine Bush UFO Fair",
+    "location": "Pine Bush, New York",
+    "country": "United States",
+    "date": "2026-06-06",
+    "time": "",
+    "type": "Festival",
+    "link": "https://pinebushmuseum.com/ufo-fair",
+    "description": "Annual downtown UFO fair in Pine Bush on June 6, 2026 with entertainment, speaker tent, vendors, and themed activities."
+  },
+  {
+    "title": "Spruce Pine Alien Festival",
+    "location": "Spruce Pine, North Carolina",
+    "country": "United States",
+    "date": "2026-06-13",
+    "time": "9:00 AM",
+    "type": "Festival",
+    "link": "https://sprucepinealienfestival.com/",
+    "description": "One-day outdoor alien and UFO festival on June 13, 2026 in downtown Spruce Pine with vendors, music, costume contests, and family activities."
   },
   {
     "title": "Roswell UFO Festival",
     "location": "Roswell, New Mexico",
     "country": "United States",
-    "date": "2026-07-03",
+    "date": "2026-07-02",
     "time": "",
     "type": "Festival",
-    "link": "https://roswellufofestival.com",
-    "description": "Annual event celebrating the Roswell incident with speakers, exhibits, and community gatherings."
-  },
-  {
-    "title": "Sedona CE5 Skywatch",
-    "location": "Sedona, Arizona",
-    "country": "United States",
-    "date": "2026-06-14",
-    "time": "8:30 PM",
-    "type": "CE5 Meetup",
-    "link": "",
-    "description": "Community skywatch and CE5 contact gathering."
-  },
-  {
-    "title": "Contact in the Desert",
-    "location": "Indian Wells, California",
-    "country": "United States",
-    "date": "2026-05-29",
-    "time": "9:00 AM",
-    "type": "Conference",
-    "link": "https://contactinthedesert.com",
-    "description": "..."
-  },
-  {
-    "title": "Roswell UFO Festival",
-    "location": "Roswell, New Mexico",
-    "country": "United States",
-    "date": "2026-07-03",
-    "time": "",
-    "type": "Festival",
-    "link": "https://roswellufofestival.com",
-    "description": "..."
-  },
-  {
-    "title": "AlienCon",
-    "location": "Las Vegas, Nevada",
-    "country": "United States",
-    "date": "2026-09-11",
-    "time": "",
-    "type": "Conference",
-    "link": "https://aliencon.com",
-    "description": "Major convention featuring speakers and panels about extraterrestrial research."
+    "link": "https://ufofestival.com/",
+    "description": "Annual Roswell festival running July 2-5, 2026 in downtown Roswell with themed entertainment, speakers, and attractions."
   }
 ]
