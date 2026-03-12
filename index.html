@@ -815,9 +815,10 @@
         const parts = formatDateParts(event.date);
         const icon = getEventIcon(event.type);
         const safeLink = event.link && event.link.trim() !== "" ? event.link : "#";
+        const slug = event.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
         return `
-          <article class="event-card" id="event-${event.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}">
+          <article class="event-card" id="event-${slug}">
             <div>
               <div class="event-top">
                 <div class="event-icon">${icon}</div>
