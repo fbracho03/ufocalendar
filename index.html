@@ -941,7 +941,7 @@ setTimeout(()=>{el.classList.remove('highlight')},2000);
         const response = await fetch("./events.json");
         allEvents = await response.json();
         setFeaturedEvent(allEvents);
-initEventMap(allEvents);
+
         populateFilters(allEvents);
         renderEvents();
       } catch (error) {
