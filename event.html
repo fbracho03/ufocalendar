@@ -258,6 +258,12 @@ crossorigin=""
         document.getElementById("type").innerText = `🛸 ${event.type}`;
         document.getElementById("description").innerText = event.description || "";
         document.getElementById("tickets").href = event.link || "#";
+        if (typeof event.latitude === "number" && typeof event.longitude === "number") {
+  document.getElementById("directions").href =
+    `https://www.google.com/maps/search/?api=1&query=${event.latitude},${event.longitude}`;
+} else {
+  document.getElementById("directions").style.display = "none";
+}
         document.getElementById("countdown").innerText = formatCountdown(event.date);
         // Initialize event map
 const map = L.map("event-map").setView([event.latitude, event.longitude], 10);
