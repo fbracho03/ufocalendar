@@ -217,7 +217,11 @@
 </div>
     </section>
   </div>
-
+<script
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""
+></script>
   <script>
     const params = new URLSearchParams(window.location.search);
     const slug = params.get("event");
@@ -267,10 +271,5 @@ L.marker([event.latitude, event.longitude])
   .openPopup();
       });
   </script>
-  <script
-src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-crossorigin=""
-></script>
 </body>
 </html>
