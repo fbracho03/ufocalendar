@@ -7,7 +7,9 @@
     "time": "11:00 AM",
     "type": "Press Conference",
     "link": "https://www.press.org/events/uap-ufo-press-conference",
-    "description": "National Press Club event hosted by James Fox featuring witnesses, medical experts, government officials, and insiders discussing UAP evidence and transparency."
+    "description": "National Press Club event hosted by James Fox featuring witnesses, medical experts, government officials, and insiders discussing UAP evidence and transparency.",
+    "latitude": 38.9072,
+    "longitude": -77.0369
   },
   {
     "title": "2026 UAP Detection and Tracking Summit",
@@ -17,7 +19,9 @@
     "time": "8:30 AM MST",
     "type": "Conference",
     "link": "https://uapsummit.org/event/uap-summit-2026/",
-    "description": "Two-day online summit running February 7-8, 2026 focused on UAP detection, tracking, aviation safety, policy, and scientific collaboration."
+    "description": "Two-day online summit running February 7-8, 2026 focused on UAP detection, tracking, aviation safety, policy, and scientific collaboration.",
+    "latitude": null,
+    "longitude": null
   },
   {
     "title": "State of the Union with Paola Harris",
@@ -27,7 +31,9 @@
     "time": "6:00 PM MT",
     "type": "Livestream",
     "link": "https://starworksusa.com/webinars/",
-    "description": "Two-hour interactive StarworksUSA masterclass with investigative journalist Paola Harris on UFO disclosure and current developments."
+    "description": "Two-hour interactive StarworksUSA masterclass with investigative journalist Paola Harris on UFO disclosure and current developments.",
+    "latitude": null,
+    "longitude": null
   },
   {
     "title": "Friends of Observers Group Monthly UFO Meeting",
@@ -37,7 +43,9 @@
     "time": "7:00 PM",
     "type": "UFO Group Meeting",
     "link": "https://pinebushmuseum.com/friends-of-observers-group-monthly-ufo-meeting",
-    "description": "Monthly in-person UFO and paranormal discussion group hosted at the Pine Bush UFO & Paranormal Museum. Starting back up again on Wednesday, March 5."
+    "description": "Monthly in-person UFO and paranormal discussion group hosted at the Pine Bush UFO & Paranormal Museum.",
+    "latitude": 41.6087,
+    "longitude": -74.2996
   },
   {
     "title": "Ozark Mountain UFO Conference",
@@ -47,7 +55,9 @@
     "time": "",
     "type": "Conference",
     "link": "https://ozarkufoconference.com/",
-    "description": "38th annual Ozark Mountain UFO Conference, running April 10-12, 2026, with lectures, vendors, keynote sessions, and meet-and-greets."
+    "description": "38th annual Ozark Mountain UFO Conference with lectures, vendors, keynote sessions, and meet-and-greets.",
+    "latitude": 36.4012,
+    "longitude": -93.7371
   },
   {
     "title": "ECETI Skywatch Weekends",
@@ -57,7 +67,9 @@
     "time": "Evenings (Thu-Sat)",
     "type": "Skywatch",
     "link": "https://www.eceti.org/skywatch-weekends.html",
-    "description": "Recurring skywatch season at ECETI Ranch from May 14 through September 14, with non-overnight skywatch availability on Thursday, Friday, and Saturday evenings."
+    "description": "Recurring skywatch season at ECETI Ranch from May 14 through September 14.",
+    "latitude": 45.9987,
+    "longitude": -121.5445
   },
   {
     "title": "Close Encounters of the 3rd Vine",
@@ -67,7 +79,9 @@
     "time": "5:30 PM",
     "type": "Social Event",
     "link": "https://ufofest.com/tickets/",
-    "description": "UFO Fest kickoff event featuring a cosmic tasting with six local wineries at McMenamins Hotel Oregon."
+    "description": "UFO Fest kickoff event featuring a cosmic tasting with local wineries at McMenamins Hotel Oregon.",
+    "latitude": 45.2108,
+    "longitude": -123.1987
   },
   {
     "title": "McMenamins UFO Festival",
@@ -77,7 +91,9 @@
     "time": "",
     "type": "Festival",
     "link": "https://www.mcmenamins.com/ufo-festival",
-    "description": "26th annual UFO Festival running May 15-16, 2026 with speakers, costume contests, parade, live music, and vendor booths."
+    "description": "26th annual UFO Festival with speakers, costume contests, parade, live music, and vendor booths.",
+    "latitude": 45.2108,
+    "longitude": -123.1987
   },
   {
     "title": "UFOs Meets Ancient Aliens",
@@ -87,7 +103,9 @@
     "time": "",
     "type": "Retreat",
     "link": "https://starworksusa.com/crestone-retreats",
-    "description": "Crestone Consciousness Retreat running May 22-24, 2026 with lectures, presentations, meditations, and skywatch."
+    "description": "Crestone Consciousness Retreat with lectures, presentations, meditations, and skywatch.",
+    "latitude": 37.9961,
+    "longitude": -105.6992
   },
   {
     "title": "Contact in the Desert",
@@ -97,7 +115,9 @@
     "time": "",
     "type": "Conference",
     "link": "https://contactinthedesert.com/",
-    "description": "Major UFO/UAP conference running May 28-June 1, 2026, focused on non-human intelligence, consciousness, technology, and disclosure."
+    "description": "Major UFO/UAP conference focused on non-human intelligence, consciousness, technology, and disclosure.",
+    "latitude": 33.7176,
+    "longitude": -116.3401
   },
   {
     "title": "Pine Bush UFO Fair",
@@ -107,7 +127,9 @@
     "time": "",
     "type": "Festival",
     "link": "https://pinebushmuseum.com/ufo-fair",
-    "description": "Annual downtown UFO fair in Pine Bush on June 6, 2026 with entertainment, speaker tent, vendors, and themed activities."
+    "description": "Annual downtown UFO fair with entertainment, speaker tent, vendors, and themed activities.",
+    "latitude": 41.6087,
+    "longitude": -74.2996
   },
   {
     "title": "Spruce Pine Alien Festival",
@@ -117,7 +139,9 @@
     "time": "9:00 AM",
     "type": "Festival",
     "link": "https://sprucepinealienfestival.com/",
-    "description": "One-day outdoor alien and UFO festival on June 13, 2026 in downtown Spruce Pine with vendors, music, costume contests, and family activities."
+    "description": "One-day outdoor alien and UFO festival in downtown Spruce Pine with vendors, music, and contests.",
+    "latitude": 35.9154,
+    "longitude": -82.0643
   },
   {
     "title": "Roswell UFO Festival",
@@ -127,6 +151,8 @@
     "time": "",
     "type": "Festival",
     "link": "https://ufofestival.com/",
-    "description": "Annual Roswell festival running July 2-5, 2026 in downtown Roswell with themed entertainment, speakers, and attractions."
+    "description": "Annual Roswell festival with themed entertainment, speakers, and attractions.",
+    "latitude": 33.3943,
+    "longitude": -104.523
   }
 ]
