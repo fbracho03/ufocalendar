@@ -254,7 +254,23 @@
         document.getElementById("description").innerText = event.description || "";
         document.getElementById("tickets").href = event.link || "#";
         document.getElementById("countdown").innerText = formatCountdown(event.date);
+        // Initialize event map
+const map = L.map("event-map").setView([event.latitude, event.longitude], 10);
+
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution: "&copy; OpenStreetMap contributors"
+}).addTo(map);
+
+L.marker([event.latitude, event.longitude])
+  .addTo(map)
+  .bindPopup(`<strong>${event.title}</strong><br>${event.location}`)
+  .openPopup();
       });
   </script>
+  <script
+src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""
+></script>
 </body>
 </html>
