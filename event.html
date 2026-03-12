@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UFO Event</title>
+<style>
+body{
+font-family: Inter, Arial, sans-serif;
+background:#070b14;
+color:#eef4ff;
+padding:40px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+h1{
+font-size:36px;
+margin-bottom:10px;
+}
+
+.meta{
+color:#9ca9c7;
+margin-bottom:20px;
+}
+
+.desc{
+margin-top:20px;
+line-height:1.6;
+}
+
+.button{
+display:inline-block;
+margin-top:25px;
+padding:12px 22px;
+background:#6ee7ff;
+color:#000;
+text-decoration:none;
+border-radius:10px;
+font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1 id="title"></h1>
+
+<div class="meta">
+<span id="location"></span><br>
+<span id="date"></span>
+</div>
+
+<p id="description" class="desc"></p>
+
+<a id="tickets" class="button" target="_blank">View Event Website</a>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(window.location.search)
+const slug = params.get("event")
+
+fetch("events.json")
+.then(res=>res.json())
+.then(events=>{
+
+const event = events.find(e =>
+e.title.toLowerCase().replace(/[^a-z0-9]+/g,"-") === slug
+)
+
+if(!event) return
+
+document.getElementById("title").innerText = event.title
+document.getElementById("location").innerText = event.location + ", " + event.country
+document.getElementById("date").innerText = event.date
+document.getElementById("description").innerText = event.description || ""
+document.getElementById("tickets").href = event.link || "#"
+
+})
+
+</script>
+
+</body>
+</html>
