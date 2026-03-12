@@ -808,13 +808,63 @@ function setFeaturedEvent(events){
   document.getElementById("featured-link").href =
     upcoming.link || "#";
 }
-    
+    let eventMap;
+let mapMarkers = [];
+
+function initEventMap(events){
+
+  const mappableEvents = events.filter(
+    e => typeof e.latitude === "number" && typeof e.longitude === "number"
+  );
+
+  if(!eventMap){
+
+    eventMap = L.map("event-map").setView([39.8283,-98.5795],4);
+
+    L.tileLayer(
+      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+      { attribution: "&copy; OpenStreetMap contributors" }
+    ).addTo(eventMap);
+
+  }
+
+  mapMarkers.forEach(marker => eventMap.removeLayer(marker));
+  mapMarkers = [];
+
+  mappableEvents.forEach(event => {
+
+    const marker = L.marker([event.latitude,event.longitude])
+      .addTo(eventMap);
+
+    marker.bindPopup(`
+      <strong>${event.title}</strong><br>
+      ${event.location}<br>
+      ${event.date}
+      ${event.time ? " • " + event.time : ""}<br>
+      <a href="${event.link || "#"}" target="_blank">View Event</a>
+    `);
+
+    mapMarkers.push(marker);
+
+  });
+
+  if(mappableEvents.length > 0){
+
+    const group = L.featureGroup(mapMarkers);
+
+    eventMap.fitBounds(
+      group.getBounds().pad(0.2)
+    );
+
+  }
+
+}
     async function loadEvents() {
       try {
         const response = await fetch("./events.json");
         allEvents = await response.json();
         setFeaturedEvent(allEvents);
-
+initEventMap(allEvents);
         populateFilters(allEvents);
         renderEvents();
       } catch (error) {
