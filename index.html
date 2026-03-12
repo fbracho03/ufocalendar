@@ -887,9 +887,11 @@ function initEventMap(events){
     eventMap = L.map("event-map").setView([39.8283,-98.5795],4);
 
     L.tileLayer(
-      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      { attribution: "&copy; OpenStreetMap contributors" }
-    ).addTo(eventMap);
+  "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+  {
+    attribution: "&copy; OpenStreetMap contributors &copy; CARTO"
+  }
+).addTo(eventMap);
 
   }
 
