@@ -812,7 +812,7 @@
         const safeLink = event.link && event.link.trim() !== "" ? event.link : "#";
 
         return `
-          <article class="event-card">
+          <article class="event-card" id="event-${event.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}">
             <div>
               <div class="event-top">
                 <div class="event-icon">${icon}</div>
