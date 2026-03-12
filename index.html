@@ -897,7 +897,7 @@ function initEventMap(events){
       ${event.location}<br>
       ${event.date}
       ${event.time ? " • " + event.time : ""}<br>
-      <a href="${event.link || "#"}" target="_blank">View Event</a>
+      <a href="#event-${event.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}" onclick="setTimeout(() => { document.getElementById('event-${event.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 100);">Go to Event Card</a>
     `);
 
     mapMarkers.push(marker);
