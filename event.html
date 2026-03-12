@@ -1,90 +1,237 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>UFO Event</title>
-<style>
-body{
-font-family: Inter, Arial, sans-serif;
-background:#070b14;
-color:#eef4ff;
-padding:40px;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UFO Event</title>
+  <style>
+    :root{
+      --bg:#070b14;
+      --card: rgba(15, 22, 38, 0.88);
+      --border: rgba(110,170,255,0.18);
+      --text:#eef4ff;
+      --muted:#9ca9c7;
+      --accent:#6ee7ff;
+      --accent-2:#8b7cff;
+      --shadow:0 10px 30px rgba(0,0,0,0.35);
+      --radius:22px;
+    }
 
-.container{
-max-width:900px;
-margin:auto;
-}
+    * { box-sizing: border-box; }
 
-h1{
-font-size:36px;
-margin-bottom:10px;
-}
+    body{
+      margin:0;
+      font-family: Inter, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(110,231,255,0.08), transparent 30%),
+        radial-gradient(circle at top right, rgba(139,124,255,0.08), transparent 25%),
+        linear-gradient(180deg, #050811 0%, #08101b 35%, #060a12 100%);
+      min-height:100vh;
+      padding:24px;
+    }
 
-.meta{
-color:#9ca9c7;
-margin-bottom:20px;
-}
+    .shell{
+      max-width: 1000px;
+      margin: 0 auto;
+    }
 
-.desc{
-margin-top:20px;
-line-height:1.6;
-}
+    .top-link{
+      display:inline-block;
+      margin-bottom:18px;
+      color:var(--accent);
+      text-decoration:none;
+      font-weight:600;
+    }
 
-.button{
-display:inline-block;
-margin-top:25px;
-padding:12px 22px;
-background:#6ee7ff;
-color:#000;
-text-decoration:none;
-border-radius:10px;
-font-weight:600;
-}
-</style>
+    .event-card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      backdrop-filter: blur(18px);
+    }
+
+    .eyebrow{
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    h1{
+      margin:0 0 12px;
+      font-size: clamp(34px, 6vw, 56px);
+      line-height: 1.02;
+      letter-spacing: -1.4px;
+    }
+
+    .meta{
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .description{
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text);
+      margin-top: 20px;
+    }
+
+    .button-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top: 28px;
+    }
+
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 20px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:700;
+      border:1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+    }
+
+    .button.primary{
+      background: linear-gradient(135deg, rgba(110,231,255,0.18), rgba(139,124,255,0.18));
+      border-color: rgba(110,231,255,0.28);
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.4fr 0.8fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .panel{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      backdrop-filter: blur(18px);
+    }
+
+    .panel h3{
+      margin:0 0 12px;
+      font-size:20px;
+    }
+
+    .panel p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    #countdown{
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    @media (max-width: 800px){
+      .grid{
+        grid-template-columns: 1fr;
+      }
+
+      .event-card,
+      .panel{
+        padding:18px;
+      }
+
+      .description{
+        font-size:16px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="shell">
+    <a href="index.html" class="top-link">← Back to UFO Events Calendar</a>
 
-<div class="container">
+    <section class="event-card">
+      <div class="eyebrow">UFO Event Details</div>
+      <h1 id="title">Loading...</h1>
 
-<h1 id="title"></h1>
+      <div class="meta">
+        <div id="location"></div>
+        <div id="date"></div>
+        <div id="time"></div>
+        <div id="type"></div>
+      </div>
 
-<div class="meta">
-<span id="location"></span><br>
-<span id="date"></span>
-</div>
+      <p id="description" class="description"></p>
 
-<p id="description" class="desc"></p>
+      <div class="button-row">
+        <a id="tickets" class="button primary" target="_blank" rel="noopener noreferrer">View Event Website</a>
+        <a href="index.html" class="button">Browse More Events</a>
+      </div>
+    </section>
 
-<a id="tickets" class="button" target="_blank">View Event Website</a>
+    <section class="grid">
+      <div class="panel">
+        <h3>About this event</h3>
+        <p id="about-copy">
+          This page is part of UFO Events Calendar, a growing hub for conferences, CE5 meetups, skywatches, festivals, and disclosure-related gatherings.
+        </p>
+      </div>
 
-</div>
+      <div class="panel">
+        <h3>Countdown</h3>
+        <div id="countdown">—</div>
+      </div>
+    </section>
+  </div>
 
-<script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const slug = params.get("event");
 
-const params = new URLSearchParams(window.location.search)
-const slug = params.get("event")
+    function formatCountdown(dateString) {
+      const now = new Date();
+      const eventDate = new Date(dateString + "T12:00:00");
+      const diff = eventDate - now;
 
-fetch("events.json")
-.then(res=>res.json())
-.then(events=>{
+      if (diff <= 0) return "Event date reached";
 
-const event = events.find(e =>
-e.title.toLowerCase().replace(/[^a-z0-9]+/g,"-") === slug
-)
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      return `${days} day${days !== 1 ? "s" : ""} away`;
+    }
 
-if(!event) return
+    fetch("events.json")
+      .then(res => res.json())
+      .then(events => {
+        const event = events.find(e =>
+          e.title.toLowerCase().replace(/[^a-z0-9]+/g, "-") === slug
+        );
 
-document.getElementById("title").innerText = event.title
-document.getElementById("location").innerText = event.location + ", " + event.country
-document.getElementById("date").innerText = event.date
-document.getElementById("description").innerText = event.description || ""
-document.getElementById("tickets").href = event.link || "#"
+        if (!event) {
+          document.getElementById("title").innerText = "Event not found";
+          return;
+        }
 
-})
-
-</script>
-
+        document.title = `${event.title} | UFO Events Calendar`;
+        document.getElementById("title").innerText = event.title;
+        document.getElementById("location").innerText = `📍 ${event.location}, ${event.country}`;
+        document.getElementById("date").innerText = `📅 ${event.date}`;
+        document.getElementById("time").innerText = event.time && event.time.trim() !== "" ? `🕒 ${event.time}` : "";
+        document.getElementById("type").innerText = `🛸 ${event.type}`;
+        document.getElementById("description").innerText = event.description || "";
+        document.getElementById("tickets").href = event.link || "#";
+        document.getElementById("countdown").innerText = formatCountdown(event.date);
+      });
+  </script>
 </body>
 </html>
